@@ -161,3 +161,23 @@ bool example1::clockTic( Cycle_t cycleCount)
     // Return false to indicate the clock handler should not be disabled
     return false;
 }
+
+/*
+ * Default constructor
+*/
+example1::example1() : Component() {}
+
+/*
+ * Serialization function
+*/
+void example1::serialize_order(SST::Core::Serialization::serializer& ser) {
+    Component::serialize_order(ser);
+
+    SST_SER(eventsToSend);
+    SST_SER(eventSize);
+    SST_SER(lastEventReceived);
+    SST_SER(bytesReceived);
+    SST_SER(rng);
+    SST_SER(out);
+    SST_SER(link);
+}

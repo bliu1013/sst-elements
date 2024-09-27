@@ -40,6 +40,7 @@
  */
 
 #include <sst/core/component.h>
+#include <sst/core/timeConverter.h>
 
 namespace SST {
 namespace simpleElementExample {
@@ -86,16 +87,16 @@ public:
 
 // Class members
 
-    // Serialization
-    basicClocks();
-    void serialize_order(SST::Core::Serialization::serializer& ser) override;
-    ImplementSerializable(SST::simpleElementExample::basicClocks)
-
     // Constructor. Components receive a unique ID and the set of parameters that were assigned in the Python input.
     basicClocks(SST::ComponentId_t id, SST::Params& params);
     
     // Destructor
     ~basicClocks();
+
+// Serialization
+    basicClocks();
+    void serialize_order(SST::Core::Serialization::serializer& ser) override;
+    ImplementSerializable(SST::simpleElementExample::basicClocks)
 
 private:
    

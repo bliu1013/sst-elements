@@ -119,3 +119,16 @@ bool basicParams::tick( Cycle_t cycles)
     return false;
 }
 
+/*
+ * Default constructor
+*/
+basicParams::basicParams() : Component() {}
+
+/*
+ * Serialization function
+*/
+void basicParams::serialize_order(SST::Core::Serialization::serializer& ser) {
+    Component::serialize_order(ser);
+
+    SST_SER(out);
+}

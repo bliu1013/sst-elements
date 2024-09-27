@@ -147,3 +147,23 @@ void basicSubComponent_Component::handleEvent(SST::Event* ev)
         leftLink->send(event);
     }
 }
+
+/*
+ * Default constructor
+*/
+basicSubComponent_Component::basicSubComponent_Component() : Component() {}
+
+/*
+ * Serialization function
+*/
+void basicSubComponent_Component::serialize_order(SST::Core::Serialization::serializer& ser) {
+    Component::serialize_order(ser);
+
+    SST_SER(out);
+    SST_SER(value);
+
+    SST_SER(leftLink);
+    SST_SER(rightLink);
+
+    SST_SER(computeUnit);
+}

@@ -278,3 +278,27 @@ bool basicLinks::clockTic( Cycle_t cycleCount)
     // Return false to indicate the clock handler should not be disabled
     return false;
 }
+
+/*
+ * Default constructor
+*/
+basicLinks::basicLinks() : Component() {}
+
+/*
+ * Serialization function
+*/
+void basicLinks::serialize_order(SST::Core::Serialization::serializer& ser) {
+    Component::serialize_order(ser);
+
+    SST_SER(eventsToSend);
+    SST_SER(eventSize);
+    SST_SER(lastEventReceived);
+    SST_SER(rng);
+    SST_SER(out);
+    SST_SER(linkHandler);
+    SST_SER(linkPolled);
+    SST_SER(linkVector);
+    SST_SER(stat_portHandler);
+    SST_SER(stat_portPolled);
+    SST_SER(stat_portVector);
+}

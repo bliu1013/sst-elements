@@ -126,3 +126,30 @@ bool basicStatistics::clockTic( Cycle_t cycleCount)
     // Return false to indicate the clock handler should not be disabled
     return false;
 }
+
+/*
+ * Default constructor
+*/
+basicStatistics::basicStatistics() : Component() {}
+
+/*
+ * Serialization function
+*/
+void basicStatistics::serialize_order(SST::Core::Serialization::serializer& ser) {
+    Component::serialize_order(ser);
+
+    SST_SER(runcycles);
+
+    SST_SER(stat_U64);
+    SST_SER(stat_I32);
+    SST_SER(stat_I64);
+    
+    SST_SER(stat_U32);
+    SST_SER(stat_U32_duplicate);
+    SST_SER(stat_U32_single);
+
+    SST_SER(stat_subid);
+
+    SST_SER(rng0);
+    SST_SER(rng1);
+}

@@ -295,3 +295,46 @@ void basicSimLifeCycle::printStatus(Output& sim_out) {
     sim_out.output("%s reporting. I have sent %u messages, received %u, and forwarded %u.\n", 
             getName().c_str(), eventsSent, eventsReceived, eventsForwarded);
 }
+
+/*
+ * Default constructor
+*/
+basicSimLifeCycle::basicSimLifeCycle() : Component() {}
+
+/*
+ * Serialization function
+*/
+void basicSimLifeCycle::serialize_order(SST::Core::Serialization::serializer& ser) {
+    Component::serialize_order(ser);
+
+    SST_SER(eventsToSend);
+    SST_SER(verbose);
+
+    SST_SER(eventsReceived);
+    SST_SER(eventsForwarded);
+    SST_SER(eventsSent);
+    SST_SER(neighbors);
+
+    SST_SER(leftMsg);
+    SST_SER(rightMsg);
+
+    SST_SER(out);
+
+    SST_SER(leftLink);
+    SST_SER(rightLink);
+
+    // Handle 'iter' neighbor iterator
+    switch ( ser.mode() ) {
+        case SST::Core::Serialization::serializer::SIZER:
+        case SST::Core::Serialization::serializer::PACK:
+        case SST::Core::Serialization::serializer::UNPACK:
+        {
+            //Reinitialize iter from neighbors
+            int index = eventsSent % neighbors.size();
+            iter = neighbors.begin();
+            std::advance(iter, index);
+
+            break;
+        }
+    }
+}

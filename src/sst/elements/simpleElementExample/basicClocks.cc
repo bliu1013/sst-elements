@@ -92,7 +92,6 @@ basicClocks::basicClocks(ComponentId_t id, Params& params) : Component(id) {
         printInterval = 1;
 }
 
-
 /*
  * Destructor, clean up our output
  */
@@ -100,24 +99,6 @@ basicClocks::~basicClocks()
 {
     delete out;
 }
-
-/*
- * Serialization function
-*/
-void basicClocks::serialize_order(SST::Core::Serialization::serializer& ser) {
-    Component::serialize_order(ser);
-
-    SST_SER(clock1converter)
-    SST_SER(clock2converter)
-    SST_SER(clock2Handler)
-    SST_SER(cycleCount)
-    SST_SER(clock0Freq)
-    SST_SER(clock1Freq)
-    SST_SER(clock2Freq)
-    SST_SER(out)
-    SST_SER(printInterval)
-}
-
 
 /* 
  * Main clock (clock0) handler
@@ -164,4 +145,26 @@ bool basicClocks::otherTick( Cycle_t cycles, uint32_t id )
     } else {
         return false; // Keep calling this handler if it hasn't been 10 cycles yet
     }
+}
+
+/*
+ * Default constructor
+*/
+basicClocks::basicClocks() : Component() {}
+
+/*
+ * Serialization function
+*/
+void basicClocks::serialize_order(SST::Core::Serialization::serializer& ser) {
+    Component::serialize_order(ser);
+    
+    SST_SER(clock1converter);
+    SST_SER(clock2converter);
+    SST_SER(clock2Handler);
+    SST_SER(cycleCount);
+    SST_SER(clock0Freq);
+    SST_SER(clock1Freq);
+    SST_SER(clock2Freq);
+    SST_SER(out);
+    SST_SER(printInterval);
 }
